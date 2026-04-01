@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perplexity Clone</title>
+    <!-- Include Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Include Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Include Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Include KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked-katex-extension/lib/index.umd.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item">
+                    <i data-lucide="search"></i>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i data-lucide="monitor"></i>
+                    <span>Computer</span>
+                </a>
+                <div class="divider"></div>
+                <a href="#" class="nav-item" id="new-thread-btn">
+                    <i data-lucide="plus"></i>
+                    <span>New thread</span>
+                </a>
+                <div class="divider"></div>
+                <a href="#" class="nav-item" id="history-btn">
+                    <i data-lucide="history"></i>
+                    <span>History</span>
+                </a>
+
+            </nav>
+            <div class="sidebar-footer">
+                <p class="recent-title">Recent</p>
+                <div class="sidebar-recent-list" id="sidebar-recent-list">
+                    <p class="recent-subtitle">Recent and active threads will appear here.</p>
+                </div>
+                <div class="spacer"></div>
+                <a href="#" class="nav-item sign-in">
+                    <div class="user-avatar">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <span>Sign In</span>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- History View (Hidden by default) -->
+            <div class="history-view" id="history-view" style="display: none;">
+                <h2>Your Conversations</h2>
+                <div class="history-list" id="history-list"></div>
+            </div>
+
+            <div class="center-content" id="chat-interface">
+                <!-- Chat History (Hidden initially) -->
+                <div class="chat-history" id="chat-history"></div>
+
+                <!-- Logo -->
+                <div class="logo-container" id="logo-container">
+                    <h1 class="logo-text">perplexity</h1>
+                </div>
+
+                <!-- Search Box -->
+                <div class="search-container">
+                    <div class="search-input-area">
+                        <textarea class="search-textarea" placeholder="Ask anything..."></textarea>
+                        <div class="search-placeholder-hint">Type <span class="slash-key">/</span> for search modes</div>
+                        <button class="send-btn" id="send-btn" disabled><i data-lucide="arrow-right"></i></button>
+                    </div>
+                    <!-- Attached File Bar (shown when a PDF is attached) -->
+                    <div class="attached-file-bar" id="attached-file-bar" style="display: none;">
+                        <div class="attached-file-chip" id="upload-status">
+                        </div>
+                    </div>
+                    <div class="search-controls">
+                        <div class="left-controls">
+                            <input type="file" id="pdf-upload" accept=".pdf" style="display: none;" />
+                            <button class="icon-btn" id="upload-btn" title="Upload PDF for RAG"><i data-lucide="paperclip"></i></button>
+                            <button class="icon-btn"><i data-lucide="plus"></i></button>
+                            <button class="pill-btn"><i data-lucide="monitor"></i> Computer <i data-lucide="plus" class="small-icon"></i></button>
+                        </div>
+                        <div class="right-controls">
+                            <button class="text-btn">Model <i data-lucide="chevron-down" class="small-icon"></i></button>
+                            <button class="icon-btn tooltip-btn" id="mic-btn"><i data-lucide="mic"></i></button>
+                            <button class="icon-btn primary-bg"><i data-lucide="sliders-horizontal"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggestions Panel -->
+                <div class="suggestions-panel">
+                    <div class="panel-header">
+                        <i data-lucide="monitor" class="small-icon"></i> Try Computer
+                    </div>
+                    
+                    <div class="categories-scroll">
+                        <button class="category-chip active"><i data-lucide="lightbulb" class="small-icon"></i> Help me learn</button>
+                        <button class="category-chip"><i data-lucide="list-todo" class="small-icon"></i> Organise my life</button>
+                        <button class="category-chip"><i data-lucide="briefcase" class="small-icon"></i> Build a business</button>
+                        <button class="category-chip"><i data-lucide="eye" class="small-icon"></i> Monitor the situat</button>
+                    </div>
+
+                    <ul class="suggestion-list">
+                        <li><a href="#">Help me deeply understand a confusing topic</a></li>
+                        <li><a href="#">Quiz me until I can recall it confidently</a></li>
+                        <li><a href="#">Teach me a new skill with weekly check-ins</a></li>
+                        <li><a href="#">Compare tools or frameworks and recommend one</a></li>
+                        <li><a href="#">Create a study guide for a certification or exam</a></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
